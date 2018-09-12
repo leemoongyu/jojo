@@ -164,9 +164,10 @@
     <ClInclude Include="iniData.h" />
     <ClInclude Include="iniTestScene.h" />
     <ClInclude Include="jojo.h" />
+    <ClInclude Include="jojoGameScene.h" />
+    <ClInclude Include="jojoMap.h" />
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="loading.h" />
-    <ClInclude Include="loadingFrameScene.h" />
     <ClInclude Include="loadingScene.h" />
     <ClInclude Include="mainGame.h" />
     <ClInclude Include="minion.h" />
@@ -206,9 +207,10 @@
     <ClCompile Include="iniData.cpp" />
     <ClCompile Include="iniTestScene.cpp" />
     <ClCompile Include="jojo.cpp" />
+    <ClCompile Include="jojoGameScene.cpp" />
+    <ClCompile Include="jojoMap.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="loading.cpp" />
-    <ClCompile Include="loadingFrameScene.cpp" />
     <ClCompile Include="loadingScene.cpp" />
     <ClCompile Include="mainGame.cpp" />
     <ClCompile Include="minion.cpp" />

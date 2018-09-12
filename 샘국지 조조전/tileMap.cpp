@@ -4,16 +4,16 @@
 HRESULT tileMap::init(void)
 {
 	//타일맵 이미지 초기화
-	IMAGEMANAGER->addFrameImage("jojo_tile", "jojo_tile.bmp", 256, 960, SAMPLETILEX, SAMPLETILEY * 3);
+	IMAGEMANAGER->addFrameImage("jojo_tile", "resource/jojo/jojo_tile.bmp", 256, 960, SAMPLETILEX, SAMPLETILEY * 3);
 	//IMAGEMANAGER->addFrameImage("jojo_tile2", "jojo_tile2.bmp", 256, 320, SAMPLETILEX, SAMPLETILEY);
-	IMAGEMANAGER->addImage("tileBg", "tileBg.bmp", 578, 1000, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("jojo_save1", "jojo_save1.bmp", 100, 100, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("jojo_save2", "jojo_save2.bmp", 100, 100, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("jojo_mouse", "jojo_mouse.bmp", 50, 50, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("jojo_arrowLeft", "jojo_arrowLeft.bmp", 50, 50, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("jojo_arrowRight", "jojo_arrowRight.bmp", 50, 50, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("jojo_edge2", "jojo_edge2.bmp", 70, 70, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("jojo_rect2", "jojo_rect2.bmp", 1600, 1000);
+	IMAGEMANAGER->addImage("tileBg", "resource/jojo/tileBg.bmp", 578, 1000, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("jojo_save1", "resource/jojo/jojo_save1.bmp", 100, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("jojo_save2", "resource/jojo/jojo_save2.bmp", 100, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("jojo_mouse", "resource/jojo/jojo_mouse.bmp", 50, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("jojo_arrowLeft", "resource/jojo/jojo_arrowLeft.bmp", 50, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("jojo_arrowRight", "resource/jojo/jojo_arrowRight.bmp", 50, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("jojo_edge2", "resource/jojo/jojo_edge2.bmp", 70, 70, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("jojo_rect2", "resource/jojo/jojo_rect2.bmp", 1600, 1000);
 
 	//맵툴셋팅
 	this->maptoolSetup();
@@ -220,6 +220,11 @@ void tileMap::update(void)
 			_rcCamera.bottom += 10;
 		}
 		
+	}
+
+	if (KEYMANAGER->isOnceKeyDown('1'))
+	{
+		SCENEMANAGER->loadScene("조조전전장");
 	}
 	
 	CAMERAMANAGER->setCamera(_rcCamera);

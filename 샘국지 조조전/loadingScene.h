@@ -7,6 +7,10 @@ class loadingScene : public gameNode
 private:
 	loading * _loading;
 
+	int index = 0;
+	image * _img;
+	int count = 0;
+
 public:
 	HRESULT init(void);
 	void release(void);

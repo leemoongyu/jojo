@@ -209,8 +209,11 @@
     <ClInclude Include="jojo.h">
       <Filter>MainGame\탱크탱크\조조전</Filter>
     </ClInclude>
-    <ClInclude Include="loadingFrameScene.h">
-      <Filter>MainGame\로딩화면</Filter>
+    <ClInclude Include="jojoGameScene.h">
+      <Filter>MainGame\탱크탱크\조조전</Filter>
+    </ClInclude>
+    <ClInclude Include="jojoMap.h">
+      <Filter>MainGame\탱크탱크\조조전</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -325,8 +328,11 @@
     <ClCompile Include="jojo.cpp">
       <Filter>MainGame\탱크탱크\조조전</Filter>
     </ClCompile>
-    <ClCompile Include="loadingFrameScene.cpp">
-      <Filter>MainGame\로딩화면</Filter>
+    <ClCompile Include="jojoGameScene.cpp">
+      <Filter>MainGame\탱크탱크\조조전</Filter>
+    </ClCompile>
+    <ClCompile Include="jojoMap.cpp">
+      <Filter>MainGame\탱크탱크\조조전</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

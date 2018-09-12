@@ -10,7 +10,7 @@
 #include "effectTestScene.h"
 #include "rotateTestScene.h"
 #include "tankGameScene.h"
-#include "loadingFrameScene.h"
+#include "jojoGameScene.h"
 
 class mainGame : public gameNode
 {

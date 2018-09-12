@@ -26,7 +26,7 @@ HRESULT progressBar::init(const char * frontImageKey, const char * backImageKey,
 	//체력바 이미지 초기화
 	_progressBarFront = IMAGEMANAGER->addImage(frontImageKey, frontImage, x, y, width, height, true, RGB(255, 0, 255));
 	_progressBarBack = IMAGEMANAGER->addImage(backImageKey, backImage, x, y, width, height, true, RGB(255, 0, 255));
-	_progressBar = IMAGEMANAGER->addFrameImage("jojo_horseRight", "jojo_horseRight.bmp", 500, 500, 872, 99, 8, 1, true, RGB(255, 0, 255));
+	_progressBar = IMAGEMANAGER->addFrameImage("jojo_horseRight", "resource/jojo/jojo_horseRight.bmp", 500, 500, 872, 99, 8, 1, true, RGB(255, 0, 255));
 
 	_index = _count = 0;
 

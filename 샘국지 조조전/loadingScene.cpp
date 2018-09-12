@@ -7,6 +7,12 @@ HRESULT loadingScene::init(void)
 	_loading = new loading;
 	_loading->init();
 
+
+	string str = "resource/title_Resource/title (" + to_string(1) + ").bmp";
+	_img = new image;
+	_img->init(str.c_str(), WINSIZEX, WINSIZEY);
+	index = 1;
+
 	//이미지 및 사운드 로딩
 	this->loadingImage();
 	this->loadingSound();
@@ -27,10 +33,13 @@ void loadingScene::update(void)
 	_loading->update();
 
 	//로딩완료후 씬변경
-	if (_loading->loadingDone()) //&& SCENEMANAGER->loadScene("조조광합성"))
+	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
-		//SCENEMANAGER->loadScene("픽셀충돌");
-		SCENEMANAGER->loadScene("조조광합성");
+		if (_loading->loadingDone()) 
+		{
+			//SCENEMANAGER->loadScene("픽셀충돌");
+			SCENEMANAGER->loadScene("조조전맵툴");
+		}
 	}
 	
 	//if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
@@ -46,9 +55,22 @@ void loadingScene::update(void)
 
 void loadingScene::render(void)
 {
+	count++;
+	if (count % 7 == 0)
+	{
+		_img->release();
+		SAFE_DELETE(_img);
+
+		string str = "resource/title_Resource/title (" + to_string(index + 1) + ").bmp";
+		_img = new image;
+		_img->init(str.c_str(), WINSIZEX, WINSIZEY);
+		index = index + 1;
+	}
+	_img->render(getMemDC());
 	//로딩클래스 렌더
 	_loading->render();
 
+	
 	//if (_loading->getCurrnetGauge() < _loading->getLoadItem().size())
 	//{
 	//	char str[128];
@@ -60,7 +82,7 @@ void loadingScene::render(void)
 	//float cur = _loading->getCurrnetGauge();
 	//float per = cur / num * 100;
 	//char str[128];
-	//sprintf_s(str, "%.f %%", per);
+	//sprintf_s(str, "%.f", per);
 	//TextOut(getMemDC(), 660, 430, str, strlen(str));
 
 }
@@ -79,6 +101,7 @@ void loadingScene::loadingImage()
 		sprintf_s(str, "%s_%d", "testImage", i + 1);
 		_loading->loadImage(str, WINSIZEX, WINSIZEY);
 	}
+
 	////IMAGEMANAGER->addImage("mountain", "mountain.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 	////백그라운드 이미지
 	//for (int i = 0; i < 500; i++)
@@ -104,7 +127,6 @@ void loadingScene::loadingImage()
 	//	_title[i] = new image;
 	//	_title[i]->init(str.c_str(), WINSIZEX, WINSIZEY);
 	//}
-
 }
 
 //로딩사운드 함수(이곳에 사운드를 전부 넣어라)

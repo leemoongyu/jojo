@@ -13,17 +13,17 @@ HRESULT mainGame::init(void)
 	//그리고 각각의 씬들이 메인게임 역할을 하면 된다
 
 	/*씬추가*/
-	SCENEMANAGER->addScene("픽셀충돌", new pixelCollision);
-	SCENEMANAGER->addScene("테스트씬", new sceneTest);
-	SCENEMANAGER->addScene("ini", new iniTestScene);
-	SCENEMANAGER->addScene("로딩화면", new loadingScene);
-	SCENEMANAGER->addScene("사운드", new soundTestScene);
-	SCENEMANAGER->addScene("애니메이션", new aniTestScene);
-	SCENEMANAGER->addScene("이펙트", new effectTestScene);
-	SCENEMANAGER->addScene("로테이트", new rotateTestScene);
+	//SCENEMANAGER->addScene("픽셀충돌", new pixelCollision);
+	//SCENEMANAGER->addScene("테스트씬", new sceneTest);
+	//SCENEMANAGER->addScene("ini", new iniTestScene);
+	//SCENEMANAGER->addScene("로딩화면", new loadingScene);
+	//SCENEMANAGER->addScene("사운드", new soundTestScene);
+	//SCENEMANAGER->addScene("애니메이션", new aniTestScene);
+	//SCENEMANAGER->addScene("이펙트", new effectTestScene);
+	//SCENEMANAGER->addScene("로테이트", new rotateTestScene);
 	SCENEMANAGER->addScene("조조전맵툴", new tankGameScene);
 	SCENEMANAGER->addScene("조조전로딩", new loadingScene);
-	SCENEMANAGER->addScene("조조광합성", new loadingFrameScene);
+	SCENEMANAGER->addScene("조조전전장", new jojoGameScene);
 
 	/*현재씬 설정*/
 	SCENEMANAGER->loadScene("조조전로딩");
