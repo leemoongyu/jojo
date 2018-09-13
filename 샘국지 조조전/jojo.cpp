@@ -26,15 +26,15 @@ void jojo::release(void)
 
 void jojo::update(void)
 {
-	_rcJojo = RectMake(_x, _y, _winth, _height);
+	_rcJojo = RectMake(_x - CAMERAMANAGER->getCamera().left, _y - CAMERAMANAGER->getCamera().top, _winth, _height);
 
-	for (int i = 0; i < 1; i+2)
-	{
-		for (int j = 0; j < i; j++)
-		{
-
-		}
-	}
+	//for (int i = 0; i < 1; i+2)
+	//{
+	//	for (int j = 0; j < i; j++)
+	//	{
+	//
+	//	}
+	//}
 
 	//for (int i = 0; i < 11; i++)
 	//{
@@ -100,7 +100,7 @@ void jojo::update(void)
 
 void jojo::render(void)
 {
-	IMAGEMANAGER->render("jojo_test", getMemDC(), _x, _y);
+	IMAGEMANAGER->render("jojo_test", getMemDC(), _x - CAMERAMANAGER->getCamera().left, _y - CAMERAMANAGER->getCamera().top);
 
 	Rectangle(getMemDC(), _rcJojo);
 
