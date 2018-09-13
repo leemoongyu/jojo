@@ -1,12 +1,15 @@
 #pragma once
 #include "gameNode.h"
+#include "tileNode.h"
 
 class jojo : public gameNode
 {
 private:
-	image * _jojo;
 
-	RECT _rc;
+	RECT _rcJojo;
+	RECT _rcRange[11];
+
+	RECT _rc[2];
 
 	float _x, _y;
 	float _winth, _height;

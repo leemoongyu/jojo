@@ -27,6 +27,7 @@ HRESULT mainGame::init(void)
 
 	/*현재씬 설정*/
 	SCENEMANAGER->loadScene("조조전로딩");
+	_img = IMAGEMANAGER->addImage("jojo_hand", "resource/jojo/jojo_hand.bmp", 50, 50, true, RGB(255, 0, 255));
 
 	return S_OK;
 }
@@ -44,6 +45,7 @@ void mainGame::release(void)
 //=============================================================
 void mainGame::update(void)
 {
+	ShowCursor(false);
 	//씬매니져 업데이트
 	SCENEMANAGER->update();
 
@@ -71,6 +73,8 @@ void mainGame::render(void)
 
 	//타임매니져 렌더
 	TIMEMANAGER->render(getMemDC());
+
+	IMAGEMANAGER->render("jojo_hand", getMemDC(), _ptMouse.x, _ptMouse.y);
 
 //=============================================================
 	//백버퍼의 내용을 HDC에 그린다 (이것도 렌더에 그냥 둘것!!)

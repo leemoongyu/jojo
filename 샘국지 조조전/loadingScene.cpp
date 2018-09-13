@@ -95,12 +95,12 @@ void loadingScene::loadingImage()
 	//_loading->loadSound();
 	SetBkMode(getMemDC(), TRANSPARENT);
 	//로딩이 너무 빠르게 진행되서 천천히 돌아가도록 테스트용으로 만들기
-	for (int i = 0; i < 570; i++)
-	{
-		char str[128];
-		sprintf_s(str, "%s_%d", "testImage", i + 1);
-		_loading->loadImage(str, WINSIZEX, WINSIZEY);
-	}
+	//for (int i = 0; i < 570; i++)
+	//{
+	//	char str[128];
+	//	sprintf_s(str, "%s_%d", "testImage", i + 1);
+	//	_loading->loadImage(str, WINSIZEX, WINSIZEY);
+	//}
 
 	////IMAGEMANAGER->addImage("mountain", "mountain.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 	////백그라운드 이미지

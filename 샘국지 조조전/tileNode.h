@@ -1,5 +1,19 @@
 #pragma once
 
+// 장수들 범위
+#define ATTRANGE 8
+#define MOVERANGE 60
+
+/*
+2 = 12
+3 = 24
+4 = 40
+5 = 60
+6 = 84
+7 = 112
+8 = 144
+*/
+
 //게임화면타일 (화면 왼쪽) 
 #define TILESIZE 64
 #define TILEX 32

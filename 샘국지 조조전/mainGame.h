@@ -14,6 +14,8 @@
 
 class mainGame : public gameNode
 {
+private:
+	image * _img;
 public:
 	HRESULT init(void);
 	void release(void);

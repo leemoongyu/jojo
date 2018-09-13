@@ -76,7 +76,7 @@ void tileMap::release(void)
 
 void tileMap::update(void)
 {
-	ShowCursor(false);
+	//ShowCursor(false);
 	//렉트위치 초기화
 	_rcSave = RectMake(1200, 750, 100, 70);
 	_rcLoad = RectMake(1370, 750, 100, 70);
@@ -379,7 +379,7 @@ void tileMap::render(void)
 	//TextOut(getMemDC(), _rcObject.left + 10, _rcObject.top + 10, "OBJECT", strlen("OBJECT"));
 	//TextOut(getMemDC(), _rcEraser.left + 30, _rcEraser.top + 10, "ERASER", strlen("ERASER"));
 
-	IMAGEMANAGER->render("jojo_mouse", getMemDC(), _ptMouse.x, _ptMouse.y);			// 백학선
+	//IMAGEMANAGER->render("jojo_mouse", getMemDC(), _ptMouse.x, _ptMouse.y);			// 백학선
 }
 
 void tileMap::maptoolSetup(void)
