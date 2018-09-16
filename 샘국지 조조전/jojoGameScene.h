@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "jojo.h"
 #include "jojoMap.h"
+#include "heojeo.h"
 
 class jojoGameScene : public gameNode
 {
@@ -9,6 +10,7 @@ private:
 
 	jojo * _jojo;
 	jojoMap * _jojoMap;
+	heojeo * _heojeo;
 
 public:
 

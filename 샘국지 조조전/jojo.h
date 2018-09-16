@@ -7,14 +7,19 @@ class jojo : public gameNode
 private:
 
 	RECT _rcJojo;
-	RECT _rcRange[11];
 
-	RECT _rc[2];
+	RECT _jojoRangeTop[MOVE_RANGE_TOP];
+	RECT _jojoRangeBottom[MOVE_RANGE_BOTTOM];
+	RECT _rcTemp;
 
 	float _x, _y;
 	float _winth, _height;
 
+	bool _isJojo;
+
 	int _count, _index;
+
+	POINT _MouseCamera;
 
 public:
 

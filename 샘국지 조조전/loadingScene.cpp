@@ -102,6 +102,10 @@ void loadingScene::loadingImage()
 	//	_loading->loadImage(str, WINSIZEX, WINSIZEY);
 	//}
 
+	IMAGEMANAGER->addImage("jojo_test", "resource/jojo/jojo_test.bmp", 64, 64, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("jojo_moveRange", "resource/jojo/jojo_moveRange.bmp", 64, 64, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("jojo_attRange", "resource/jojo/jojo_attRange.bmp", 64, 64, true, RGB(255, 0, 255));
+
 	////IMAGEMANAGER->addImage("mountain", "mountain.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 	////백그라운드 이미지
 	//for (int i = 0; i < 500; i++)

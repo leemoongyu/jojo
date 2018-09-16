@@ -4,17 +4,19 @@
 HRESULT jojo::init(void)
 {
 	IMAGEMANAGER->addImage("jojo_test", "resource/jojo/jojo_test.bmp", 64, 64, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("jojo_moveRange", "resource/jojo/jojo_moveRange", 64, 64, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("jojo_attRange", "resource/jojo/jojo_attRange", 64, 64, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("jojo_moveRange", "resource/jojo/jojo_moveRange.bmp", 64, 64, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("jojo_attRange", "resource/jojo/jojo_attRange.bmp", 64, 64, true, RGB(255, 0, 255));
 
 	_x = 896.f;
-	_y = 320.f;
+	_y = 512.f;
 	_winth = TILESIZE;
 	_height = TILESIZE;
 
 	_rcJojo = RectMake(_x, _y, _winth, _height);
 
 	_count = _index = 0;
+
+	_isJojo = false;
 
 	return S_OK;
 }
@@ -26,83 +28,64 @@ void jojo::release(void)
 
 void jojo::update(void)
 {
-	_rcJojo = RectMake(_x - CAMERAMANAGER->getCamera().left, _y - CAMERAMANAGER->getCamera().top, _winth, _height);
+	_rcJojo = RectMake(_x, _y, _winth, _height);
 
-	//for (int i = 0; i < 1; i+2)
-	//{
-	//	for (int j = 0; j < i; j++)
-	//	{
-	//
-	//	}
-	//}
+	_MouseCamera = { _MouseCamera.x + CAMERAMANAGER->getCamera().left, _MouseCamera.y + CAMERAMANAGER->getCamera().top };
 
-	//for (int i = 0; i < 11; i++)
-	//{
-	//	int a = 5;
-	//	int b = 6;
-	//	if (i == 1)
-	//	{
-	//		a = 4;
-	//		b = 7;
-	//	}
-	//	if (i == 2)
-	//	{
-	//		a = 3;
-	//		b = 8;
-	//	}
-	//	if (i == 3)
-	//	{
-	//		a = 2;
-	//		b = 9;
-	//	}
-	//	if (i == 4)
-	//	{
-	//		a = 1;
-	//		b = 10;
-	//	}
-	//	if (i == 5)
-	//	{
-	//		a = 0;
-	//		b = 12;
-	//	}
-	//	if (i == 6)
-	//	{
-	//		a = 1;
-	//		b = 10;
-	//	}
-	//	if (i == 7)
-	//	{
-	//		a = 2;
-	//		b = 9;
-	//	}
-	//	if (i == 8)
-	//	{
-	//		a = 3;
-	//		b = 8;
-	//	}
-	//	if (i == 9)
-	//	{
-	//		a = 4; 
-	//		b = 7;
-	//	}
-	//	if (i == 10)
-	//	{
-	//		a = 5;
-	//		b = 6;
-	//	}
-	//	for (int j = a; j < b; j++)
-	//	{
-	//		_rcRange[i] = RectMake(300, 300 + i * TILESIZE, 64, 64);
-	//	}
-	//}
+	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	{
+		if (PtInRect(&_rcJojo, _ptMouse))
+		{
+			_isJojo = true;
+		}
+	}
+	
+	if (_isJojo)
+	{
+		int k = 0;				// 렉트 인덱스 돌려줄 변수
+		for (int i = 0; i < 6; i++)						// 조조 움직일 범위 렉트 ( 탑 )
+		{
+			for (int j = 0; j < i * 2 + 1; j++)
+			{
+				//_rc[i + j / 3] = RectMake(500 - (TILESIZE * i) + (TILESIZE * j), 500 + (i * TILESIZE), TILESIZE, TILESIZE);
+				_jojoRangeTop[k] = RectMake(_x - (TILESIZE * i) + (TILESIZE * j), (_y - 320) + (i * TILESIZE), TILESIZE, TILESIZE);
+				k++;
+				if (k >= MOVE_RANGE_TOP) break;
+			}
+			if (k >= MOVE_RANGE_TOP) break;
+		}
+
+		int n = 0;				// 렉트 인덱스 돌려줄 변수
+		for (int i = 0; i < 5; i++)						// 조조 움직일 범위 렉트 ( 바텀 )
+		{
+			for (int j = 9; j > i * 2; j--)
+			{
+				_jojoRangeBottom[n] = RectMake((_x - 288) - (TILESIZE * j) + (_x - 288) + (TILESIZE * i), _y + TILESIZE + (i * TILESIZE), TILESIZE, TILESIZE);
+				n++;
+				if (n >= MOVE_RANGE_BOTTOM) break;
+			}
+			if (n >= MOVE_RANGE_BOTTOM) break;
+		}
+	}
 	
 }
 
 void jojo::render(void)
 {
+	if (_isJojo)
+	{
+		for (int i = 0; i < MOVE_RANGE_TOP; i++)
+		{
+			IMAGEMANAGER->render("jojo_moveRange", getMemDC(), _jojoRangeTop[i].left - CAMERAMANAGER->getCamera().left, _jojoRangeTop[i].top - CAMERAMANAGER->getCamera().top);
+		}
+
+		for (int i = 0; i < MOVE_RANGE_BOTTOM; i++)
+		{
+			IMAGEMANAGER->render("jojo_moveRange", getMemDC(), _jojoRangeBottom[i].left - CAMERAMANAGER->getCamera().left, _jojoRangeBottom[i].top - CAMERAMANAGER->getCamera().top);
+		}
+	}
+	
 	IMAGEMANAGER->render("jojo_test", getMemDC(), _x - CAMERAMANAGER->getCamera().left, _y - CAMERAMANAGER->getCamera().top);
 
-	Rectangle(getMemDC(), _rcJojo);
-
-	//Rectangle(getMemDC(), _rcRange[11]);
+	RectangleMake(getMemDC(), _rcJojo.left - CAMERAMANAGER->getCamera().left, _rcJojo.top - CAMERAMANAGER->getCamera().top, TILESIZE, TILESIZE);
 }

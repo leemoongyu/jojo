@@ -1,8 +1,10 @@
 #pragma once
 
 // 장수들 범위
+#define MOVE_RANGE_TOP 36
+#define MOVE_RANGE_BOTTOM 25
+
 #define ATTRANGE 8
-#define MOVERANGE 60
 
 /*
 2 = 12

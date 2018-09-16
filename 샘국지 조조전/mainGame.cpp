@@ -16,7 +16,7 @@ HRESULT mainGame::init(void)
 	//SCENEMANAGER->addScene("픽셀충돌", new pixelCollision);
 	//SCENEMANAGER->addScene("테스트씬", new sceneTest);
 	//SCENEMANAGER->addScene("ini", new iniTestScene);
-	//SCENEMANAGER->addScene("로딩화면", new loadingScene);
+	SCENEMANAGER->addScene("로딩화면", new loadingScene);
 	//SCENEMANAGER->addScene("사운드", new soundTestScene);
 	//SCENEMANAGER->addScene("애니메이션", new aniTestScene);
 	//SCENEMANAGER->addScene("이펙트", new effectTestScene);
