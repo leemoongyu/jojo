@@ -149,6 +149,8 @@
   <ItemGroup>
     <ClInclude Include="animation.h" />
     <ClInclude Include="aniTestScene.h" />
+    <ClInclude Include="aStar.h" />
+    <ClInclude Include="aStarTile.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="camel.h" />
     <ClInclude Include="cameraManager.h" />
@@ -194,6 +196,8 @@
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="aniTestScene.cpp" />
+    <ClCompile Include="aStar.cpp" />
+    <ClCompile Include="aStarTile.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="camel.cpp" />
     <ClCompile Include="cameraManager.cpp" />

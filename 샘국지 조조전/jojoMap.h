@@ -17,6 +17,8 @@ private:
 
 public:
 
+	tagTile* getMapTile() { return _mapTile; }
+
 	HRESULT init(void);
 	void release(void);
 	void update(void);

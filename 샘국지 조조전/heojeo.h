@@ -11,7 +11,7 @@ private:
 	RECT _heojeoRangeBottom[MOVE_RANGE_BOTTOM];
 
 	float _x, _y;
-	float _winth, _height;
+	float _width, _height;
 
 	int _index, _count;
 

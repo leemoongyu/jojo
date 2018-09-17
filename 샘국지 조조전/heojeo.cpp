@@ -5,10 +5,10 @@ HRESULT heojeo::init(void)
 {
 	_x = 1216.f;
 	_y = 896.f;
-	_winth = TILESIZE;
+	_width = TILESIZE;
 	_height = TILESIZE;
 
-	_rcHeojeo = RectMake(_x, _y, _winth, _height);
+	_rcHeojeo = RectMake(_x, _y, _width, _height);
 
 	_isHeojeo = false;
 
@@ -22,13 +22,13 @@ void heojeo::release(void)
 
 void heojeo::update(void)
 {
-	_rcHeojeo = RectMake(_x, _y, _winth, _height);
+	_rcHeojeo = RectMake(_x, _y, _width, _height);
 
-	_MouseCamera = { _MouseCamera.x + CAMERAMANAGER->getCamera().left, _MouseCamera.y + CAMERAMANAGER->getCamera().top };
+	_MouseCamera = { _ptMouse.x + CAMERAMANAGER->getCamera().left, _ptMouse.y + CAMERAMANAGER->getCamera().top };
 
 	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
 	{
-		if (PtInRect(&_rcHeojeo, _ptMouse))
+		if (PtInRect(&_rcHeojeo, _MouseCamera))
 		{
 			_isHeojeo = true;
 		}
@@ -77,9 +77,9 @@ void heojeo::render(void)
 		}
 	}
 
-	//char str[64];
-	//sprintf_s(str, "%d", _ptMouse.x);
-	//TextOut(getMemDC(), 100, 100, str, strlen(str));
+	char str[64];
+	sprintf_s(str, "%d", _MouseCamera);
+	TextOut(getMemDC(), 100, 100, str, strlen(str));
 
 	RectangleMake(getMemDC(), _rcHeojeo.left - CAMERAMANAGER->getCamera().left, _rcHeojeo.top - CAMERAMANAGER->getCamera().top, TILESIZE, TILESIZE);
 }

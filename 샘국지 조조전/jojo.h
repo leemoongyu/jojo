@@ -1,19 +1,25 @@
 #pragma once
 #include "gameNode.h"
 #include "tileNode.h"
+#include "aStar.h"
+#include "jojoMap.h"
+
 
 class jojo : public gameNode
 {
 private:
 
+	//aStar * _aStar;
+	jojoMap * _jojoMap;
+
 	RECT _rcJojo;
 
-	RECT _jojoRangeTop[MOVE_RANGE_TOP];
-	RECT _jojoRangeBottom[MOVE_RANGE_BOTTOM];
+	tagSampleTile _jojoRangeTop[MOVE_RANGE_TOP];
+	tagSampleTile _jojoRangeBottom[MOVE_RANGE_BOTTOM];
 	RECT _rcTemp;
-
+	
 	float _x, _y;
-	float _winth, _height;
+	float _width, _height;
 
 	bool _isJojo;
 
@@ -23,14 +29,20 @@ private:
 
 public:
 
+	RECT getRcJojo() { return _rcJojo; }
+	void setRcJojo(RECT rcJojo) { _rcJojo = rcJojo; }
+	
 	float getX() { return _x; }
 	void setX(float x) { _x = x; }
 	float getY() { return _y; }
 	void setY(float y) { _y = y; }
-	float getWinth() { return _winth; }
-	void setWiinth(float winth) { _winth = winth; }
+	float getWidth() { return _width; }
+	void setWidth(float winth) { _width = winth; }
 	float getHeight() { return _height; }
 	void setHeight(float height) { _height = height; }
+
+	bool getIsJojo() { return _isJojo; }
+	void setIsJojo(bool isJojo) { _isJojo = isJojo; }
 
 	HRESULT init(void);
 	void release(void);

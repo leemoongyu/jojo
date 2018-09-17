@@ -87,6 +87,9 @@
     <Filter Include="GameFramework2D\애니메이션\유틸">
       <UniqueIdentifier>{0e047507-cff2-4a5e-8198-0c562e8e0211}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\탱크탱크\에이스타">
+      <UniqueIdentifier>{87904a1c-9ce5-4357-ba20-078f243da9e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="commonMacroFunction.h">
@@ -218,6 +221,12 @@
     <ClInclude Include="heojeo.h">
       <Filter>MainGame\탱크탱크\조조전</Filter>
     </ClInclude>
+    <ClInclude Include="aStar.h">
+      <Filter>MainGame\탱크탱크\에이스타</Filter>
+    </ClInclude>
+    <ClInclude Include="aStarTile.h">
+      <Filter>MainGame\탱크탱크\에이스타</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -339,6 +348,12 @@
     </ClCompile>
     <ClCompile Include="heojeo.cpp">
       <Filter>MainGame\탱크탱크\조조전</Filter>
+    </ClCompile>
+    <ClCompile Include="aStar.cpp">
+      <Filter>MainGame\탱크탱크\에이스타</Filter>
+    </ClCompile>
+    <ClCompile Include="aStarTile.cpp">
+      <Filter>MainGame\탱크탱크\에이스타</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
