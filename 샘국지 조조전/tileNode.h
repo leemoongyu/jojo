@@ -3,6 +3,7 @@
 // 장수들 범위
 #define MOVE_RANGE_TOP 36
 #define MOVE_RANGE_BOTTOM 25
+#define MOVE_RANGE 61
 
 #define ATTRANGE 8
 
@@ -80,6 +81,8 @@ struct tagSampleTile
 	int terrainFrameY;
 	int terrainX;
 	int terrainY;
+	int indexX, indexY;
+	float x, y;
 };
 
 //현재타일 구조체

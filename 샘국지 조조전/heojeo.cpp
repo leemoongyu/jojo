@@ -24,16 +24,6 @@ void heojeo::update(void)
 {
 	_rcHeojeo = RectMake(_x, _y, _width, _height);
 
-	_MouseCamera = { _ptMouse.x + CAMERAMANAGER->getCamera().left, _ptMouse.y + CAMERAMANAGER->getCamera().top };
-
-	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
-	{
-		if (PtInRect(&_rcHeojeo, _MouseCamera))
-		{
-			_isHeojeo = true;
-		}
-	}
-
 	if (_isHeojeo)
 	{
 		int k = 0;				// 렉트 인덱스 돌려줄 변수
@@ -41,7 +31,6 @@ void heojeo::update(void)
 		{
 			for (int j = 0; j < i * 2 + 1; j++)
 			{
-				//_rc[i + j / 3] = RectMake(500 - (TILESIZE * i) + (TILESIZE * j), 500 + (i * TILESIZE), TILESIZE, TILESIZE);
 				_heojeoRangeTop[k] = RectMake(_x - (TILESIZE * i) + (TILESIZE * j), (_y - 320) + (i * TILESIZE), TILESIZE, TILESIZE);
 				k++;
 				if (k >= MOVE_RANGE_TOP) break;
@@ -77,9 +66,9 @@ void heojeo::render(void)
 		}
 	}
 
-	char str[64];
-	sprintf_s(str, "%d", _MouseCamera);
-	TextOut(getMemDC(), 100, 100, str, strlen(str));
+	//char str[64];
+	//sprintf_s(str, "%d", _MouseCamera);
+	//TextOut(getMemDC(), 100, 100, str, strlen(str));
 
 	RectangleMake(getMemDC(), _rcHeojeo.left - CAMERAMANAGER->getCamera().left, _rcHeojeo.top - CAMERAMANAGER->getCamera().top, TILESIZE, TILESIZE);
 }

@@ -21,6 +21,11 @@ private:
 
 public:
 
+	RECT getRcHeojeo() { return _rcHeojeo; }
+	void setRcHeojeo(RECT rcHeojeo) { _rcHeojeo = rcHeojeo; }
+	bool getIsHeojeo() { return _isHeojeo; }
+	void setIsHeojeo(bool isHeojeo) { _isHeojeo = isHeojeo; }
+
 	HRESULT init(void);
 	void release(void);
 	void update(void);
