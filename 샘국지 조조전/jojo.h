@@ -36,6 +36,9 @@ private:
 	int indexX;
 	int indexY;
 
+	int tempX;
+	int tempY;
+
 	bool _isJojo;
 	bool _isRange;
 

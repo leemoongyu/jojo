@@ -148,6 +148,8 @@ void jojo::update(void)
 			{
 				indexX = _jojoRange[i].indexX;
 				indexY = _jojoRange[i].indexY;
+				tempX = _jojoRange[i].rc.left;
+				tempY = _jojoRange[i].rc.top;
 				break;
 			}
 		}
