@@ -22,14 +22,15 @@ HRESULT jojo::init(void)
 
 	for (int i = 0; i < MOVE_RANGE; i++)
 	{
-		_jojoRange[i].indexX = 0;
-		_jojoRange[i].indexY = 0;
+		_jojoRange[i].indexX = 1;
+		_jojoRange[i].indexY = 1;
 	}
 
 	indexX = indexY = 0;
 
 	_isJojo = false;
-	_isRange = false;
+	_isMove = false;
+	_isMap = false;
 
 	_heojeo = new heojeo;
 	_heojeo->init();
@@ -60,8 +61,14 @@ void jojo::update(void)
 		if (PtInRect(&_jojo.rc, _MouseCamera))
 		{
 			_isJojo = true;
+			_isMove = false;
 			_jojo.indexX = 30;
 			_jojo.indexY = 5;
+		}
+		else
+		{
+			_isJojo = false;
+			_isMove = true;
 		}
 
 		if (PtInRect(&_heojeo->getRcHeojeo(), _MouseCamera))
@@ -69,6 +76,15 @@ void jojo::update(void)
 			_heojeo->setIsHeojeo(true);
 		}
 	}
+
+	//for (int i = 0; i < TILEX * TILEY; i++)
+	//{
+	//	if (PtInRect(&_jojoMap->getMapTile()[i].rc, _MouseCamera))
+	//	{
+	//		_isMap = true;
+	//	}
+	//}
+	
 	/*
 	if (!_isRange)
 	{
@@ -109,37 +125,39 @@ void jojo::update(void)
 	int moveRangeX = 11;		// 이동거리 렉트 X
 	int rangeIndex = 0;			// 인덱스 ++시켜줄 변수
 
-	if (_isJojo)
+	if (!_isMove)
 	{
-		for (int i = 0; i < moveRangeX; i++)
+		if (_isJojo)
 		{
-			for (int j = 0; j < moveRangeY; j++)
+			for (int i = 0; i < moveRangeX; i++)
 			{
-				if (i < 6)		// 캐릭터 위에 이동거리 렉트
+				for (int j = 0; j < moveRangeY; j++)
 				{
-					_jojoRange[rangeIndex].rc = RectMake(_jojo.x + i * (-TILESIZE) + (j * TILESIZE), (_jojo.y - TILESIZE * 5) + (i * TILESIZE), TILESIZE, TILESIZE);
-					_jojoRange[rangeIndex].indexX = rangeIndex;
-					_jojoRange[rangeIndex].indexY = i;
+					if (i < 6)		// 캐릭터 위에 이동거리 렉트
+					{
+						_jojoRange[rangeIndex].rc = RectMake(_jojo.x + i * (-TILESIZE) + (j * TILESIZE), (_jojo.y - TILESIZE * 5) + (i * TILESIZE), TILESIZE, TILESIZE);
+						_jojoRange[rangeIndex].indexX = rangeIndex;
+						_jojoRange[rangeIndex].indexY = i;
+					}
+					else			// i가 6보다 커지면 캐릭터 아래 이동거리 렉트
+					{
+						_jojoRange[rangeIndex].rc = RectMake(_jojo.x + (moveRangeX - (i + 1)) * -TILESIZE + (j * TILESIZE), (_jojo.y - TILESIZE * 5) + i * TILESIZE, TILESIZE, TILESIZE);
+						_jojoRange[rangeIndex].indexX = rangeIndex;
+						_jojoRange[rangeIndex].indexY = i;
+					}
+					rangeIndex++;
 				}
-				else			// i가 6보다 커지면 캐릭터 아래 이동거리 렉트
+				if (i < 5)			// i가 5이하면 이동거리렉트 y값 증가
 				{
-					_jojoRange[rangeIndex].rc = RectMake(_jojo.x + (moveRangeX - (i + 1)) * -TILESIZE + (j * TILESIZE), (_jojo.y - TILESIZE * 5) + i * TILESIZE, TILESIZE, TILESIZE);
-					_jojoRange[rangeIndex].indexX = rangeIndex;
-					_jojoRange[rangeIndex].indexY = i;
+					moveRangeY += 2;
 				}
-				rangeIndex++;
-			}
-			if (i < 5)			// i가 5이하면 이동거리렉트 y값 증가
-			{
-				moveRangeY += 2;
-			}
-			else                // i가 6보다 커짐 이동거리렉트 y값 감소
-			{
-				moveRangeY -= 2;
+				else                // i가 6보다 커짐 이동거리렉트 y값 감소
+				{
+					moveRangeY -= 2;
+				}
 			}
 		}
 	}
-
 	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
 	{
 		for (int i = 0; i < MOVE_RANGE; i++)
@@ -150,28 +168,80 @@ void jojo::update(void)
 				indexY = _jojoRange[i].indexY;
 				tempX = _jojoRange[i].rc.left;
 				tempY = _jojoRange[i].rc.top;
+				_isMove = true;
+				_isJojo = false;
 				break;
 			}
 		}
 	}
 
-	for (int i = 0; i < MOVE_RANGE; i++)
+	for (int i = 0; i < MOVE_RANGE; i++)					// 장수 이동
 	{
-		if (indexX < _jojoRange[i].indexX && indexY == _jojoRange[i].indexY)
+		if (indexX <= _jojoRange[i].indexX && indexY == _jojoRange[i].indexY &&_jojo.rc.left < tempX)		// 장수 오른쪽 이동
 		{
-				
+			_jojo.x++;
+			if (tempX < _jojo.rc.left)
+			{
+				_jojo.rc.left = tempX;
+				_jojo.rc.top = tempY;
+				_jojo.x = tempX;
+				_jojo.y = tempY;
+			}
 		}
+		
+		if (indexX <= _jojoRange[i].indexX && indexY < _jojoRange[i].indexY && _jojo.rc.top > tempY && _jojo.rc.left < tempX)		// 장수 오른쪽 위로 이동
+		{
+			_jojo.y--;
+			if (tempY > _jojo.rc.top)
+			{
+				_jojo.rc.left = tempX;
+				_jojo.rc.top = tempY;
+				_jojo.x = tempX;
+				_jojo.y = tempY;
+			}
+		}
+
+		if (indexX >= _jojoRange[i].indexX && indexY > _jojoRange[i].indexY && _jojo.rc.top < tempY && _jojo.rc.left < tempX)			// 장수 오른쪽 아래로 이동
+		{
+			_jojo.y++;
+			if (tempY < _jojo.rc.top)
+			{
+				_jojo.rc.left = tempX;
+				_jojo.rc.top = tempY;
+				_jojo.x = tempX;
+				_jojo.y = tempY;
+			}
+		}
+		
+		if (indexX > _jojoRange[i].indexX && indexY == _jojoRange[i].indexY && _jojo.rc.left > tempX)						// 장수 왼쪽 이동
+		{
+			_jojo.x--;
+			if (tempX > _jojo.rc.left)
+			{
+				_jojo.rc.left = tempX;
+				_jojo.rc.top = tempY;
+				_jojo.x = tempX;
+				_jojo.y = tempY;
+			}
+		}
+
+		//if (indexX >= _jojoRange[i].indexX && indexY > _jojoRange[i].indexY && _jojo.rc.top < tempY && _jojo.rc.left < tempX)
+		//{
+		//	_jojo.y--;
+		//}
 	}
-	
 }
 
 void jojo::render(void)
 {
-	if (_isJojo)
+	if (!_isMove)
 	{
-		for (int i = 0; i < MOVE_RANGE; i++)
+		if (_isJojo)
 		{
-			IMAGEMANAGER->render("jojo_moveRange", getMemDC(), _jojoRange[i].rc.left - CAMERAMANAGER->getCamera().left, _jojoRange[i].rc.top - CAMERAMANAGER->getCamera().top);
+			for (int i = 0; i < MOVE_RANGE; i++)
+			{
+				IMAGEMANAGER->render("jojo_moveRange", getMemDC(), _jojoRange[i].rc.left - CAMERAMANAGER->getCamera().left, _jojoRange[i].rc.top - CAMERAMANAGER->getCamera().top);
+			}
 		}
 	}
 	char str[64];
@@ -190,6 +260,14 @@ void jojo::render(void)
 	sprintf_s(str3, "%d", indexY);
 	TextOut(getMemDC(), 200, 250, str3, strlen(str3));
 
+	char str4[64];
+	sprintf_s(str4, "%d", _isMove);
+	TextOut(getMemDC(), 300, 100, str4, strlen(str4));
+
+	char str5[64];
+	sprintf_s(str5, "%d", _jojo.rc);
+	TextOut(getMemDC(), 300, 150, str5, strlen(str5));
+
 	for (int i = 0; i < MOVE_RANGE; i++)
 	{
 		char str[64];
@@ -203,7 +281,7 @@ void jojo::render(void)
 
 	_heojeo->render();
 
-	IMAGEMANAGER->render("jojo_test", getMemDC(), _jojo.x - CAMERAMANAGER->getCamera().left, _jojo.y - CAMERAMANAGER->getCamera().top);
+	//IMAGEMANAGER->render("jojo_test", getMemDC(), _jojo.x - CAMERAMANAGER->getCamera().left, _jojo.y - CAMERAMANAGER->getCamera().top);
 
 	RectangleMake(getMemDC(), _jojo.rc.left - CAMERAMANAGER->getCamera().left, _jojo.rc.top - CAMERAMANAGER->getCamera().top, TILESIZE, TILESIZE);
 

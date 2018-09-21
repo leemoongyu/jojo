@@ -40,7 +40,8 @@ private:
 	int tempY;
 
 	bool _isJojo;
-	bool _isRange;
+	bool _isMove;
+	bool _isMap;
 
 	int _count, _index;
 
